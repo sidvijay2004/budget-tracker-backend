@@ -1,25 +1,22 @@
-const axios = require('axios');
+const OpenAI = require("openai");
 
-// Set up your OpenAI API key
-const apiKey = 'YOUR_OPENAI_API_KEY';
-const endpoint = 'https://api.openai.com/v1/engines/davinci/completions';
+const openai = new OpenAI({
+  apiKey: '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'
+});
 
-// Data you want to input to the API
-const data = {
-  prompt: "Once upon a time",
-  max_tokens: 50
-};
-
-// Send a POST request to the OpenAI API
-axios.post(endpoint, data, {
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${apiKey}`
-  }
-})
-  .then(response => {
-    console.log('OpenAI API Response:', response.data.choices[0].text);
-  })
-  .catch(error => {
-    console.error('Error:', error);
+async function main() {
+  const completion = await openai.chat.completions.create({
+    messages: [
+      {
+        role: "system",
+        content: "Act as a dog enthusiast when answering questions",
+      },
+      { role: "user", content: "What is better, cats or dogs?" },
+    ],
+    model: "gpt-3.5-turbo-1106",
+    // response_format: { type: "json_object" },
   });
+  console.log(completion.choices[0].message.content);
+}
+
+main();
