@@ -22,10 +22,18 @@ app.post('/openai', async (req, res) => {
           role: 'system',
           content:
             'Act as a financial analyst. ' +
-            'I am going to give you some information about a user in JSON Format and give recommendations and a budget to meet their demands.' +
-            'The unit for salary and savings Goal is in Dollars. The time period is in weeks. The expenses given are fixed and cannot be changed.' +
-            'In addition, there is a description field to give more information about the user. Give a pure list first of their budget.' +
-            'Then, in another paragraph, give advice and what the user can do and how to use the budget.',
+            'I am going to give you some information about me in JSON Format' +
+            'The unit for salary and savings Goal is in Dollars and is over a year. The time period is in weeks. The expenses are expenses during this time' +
+            'In addition, there is a description field to give more information about me. ' +
+            'I want you to analyze all the data and rate how well I has created a budget on the following criteria: ' +
+            'Percentage of Salary Saved, How necessary expenses are and if they can be cut down.' + 
+            'I want you to take into account any personal data I entered in the description in your evaluation' +
+            'Make your response informative, accurate, but do not be afraid to be funny as well!' +
+
+            'For the format of your response. I want the first line to be "Rating Score: " and the score (out of 100%) [Give 1 line space]' +
+            'Next Paragraph: I want you to give specific reasoning based on my data why you gave this score [Give 1 line space] ' +
+            'Finally, I want you to give specific and actionable advice on what I can do to improve my score'
+            ,
         },
         {
           role: 'user',
