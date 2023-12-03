@@ -51,6 +51,39 @@ app.post('/openai', async (req, res) => {
   }
 });
 
+// Endpoint to handle OpenAI DALLE function
+app.post('/openai/image', async (req, res) => {
+const userData = req.body; // User data received from the client (React app)
+// Destructure properties from userData
+const { salary, savingsGoal, timePeriod, expenses, description} = userData;
+
+// Create a prompt using userData properties
+const prompt = `Generate an image for this: Description: ${description} engaging in one of the following expenses: ${expenses}`;
+
+const numberOfImages = 1;
+const imageSize = "256x256";
+
+  try {
+    const imageGenaration = await openai.images.generate(	
+      {
+        prompt: prompt,
+        n: numberOfImages,
+        size: imageSize
+      
+      });
+
+    // console.log(imageGenaration.data);
+
+    // Extract the URL of the first image
+    const image_url = imageGenaration.data[0].url; // Assuming 'url' contains the image URL
+    res.json({ image_url: image_url }); // Sending the first URL back to the client (React app)
+
+  } catch (error) {
+    console.error(error); // Log the error to the console
+    res.status(500).json({ error: 'An error occurred' }); // Handle error cases
+  }
+});
+
 app.get('*', (req, res) => {
   res.status(404).send('404: Page not found');
 });
