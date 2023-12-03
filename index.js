@@ -57,15 +57,19 @@ const userData = req.body; // User data received from the client (React app)
 // Destructure properties from userData
 const { salary, savingsGoal, timePeriod, expenses, description} = userData;
 
+console.log('User Description:', userData.description); // Log the description field
+
 // Create a prompt using userData properties
-const prompt = `Generate an image for this: Description: ${description} engaging in one of the following expenses: ${expenses}`;
+prompt =  `Generate a graph for this information: salary($): ${salary}, ` + 
+`savingsGoal($): ${savingsGoal}, timePeriod(weeks): ${timePeriod}, expenses($): ${expenses},`
 
 const numberOfImages = 1;
-const imageSize = "256x256";
+const imageSize = "1024x1024";
 
   try {
     const imageGenaration = await openai.images.generate(	
       {
+        model: "dall-e-3",
         prompt: prompt,
         n: numberOfImages,
         size: imageSize
