@@ -3,6 +3,10 @@ const bodyParser = require('body-parser');
 const OpenAI = require('openai');
 const cors = require('cors'); // Import the cors package
 
+const { MongoClient } = require('mongodb');
+const connectToDatabase = require('./db'); // Import the connectToDatabase function
+
+
 const app = express();
 app.use(bodyParser.json());
 app.use(cors()); // Enable CORS for all routes
@@ -60,8 +64,7 @@ const { salary, savingsGoal, timePeriod, expenses, description} = userData;
 console.log('User Description:', userData.description); // Log the description field
 
 // Create a prompt using userData properties
-prompt =  `Generate a graph for this information: salary($): ${salary}, ` + 
-`savingsGoal($): ${savingsGoal}, timePeriod(weeks): ${timePeriod}, expenses($): ${expenses},`
+prompt =  `Generate an image for this information about a user: user description: ${description}, `
 
 const numberOfImages = 1;
 const imageSize = "1024x1024";
@@ -87,6 +90,63 @@ const imageSize = "1024x1024";
     res.status(500).json({ error: 'An error occurred' }); // Handle error cases
   }
 });
+
+// Endpoint to handle inserting data into the database
+app.post('/putData', async (req, res) => {
+  try {
+    const db = await connectToDatabase(); // Establish database connection
+
+    // Accessing the desired collection
+    const collection = db.collection('myCollection'); // Replace with your collection name
+    
+    // Data received from the client's request body
+    const newData = req.body;
+
+    // Insert a single document into the collection
+    const insertResult = await collection.insertOne(newData);
+    
+    console.log('Insertion Result:', insertResult);
+
+    // Check the insert result and respond to the client
+    if (insertResult.acknowledged) {
+      res.json({ message: 'Data inserted successfully', insertedId: insertResult.insertedId });
+    } else {
+      res.status(500).json({ error: 'Failed to insert data' });
+    }    
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'An error occurred' });
+  }
+});
+
+// Endpoint to retrieve specific data from the database based on user input
+app.get('/getData', async (req, res) => {
+  try {
+    const db = await connectToDatabase(); // Establish database connection
+
+    // Accessing the desired collection
+    const collection = db.collection('myCollection'); // Replace with your collection name
+
+    // Extract user input/query from request parameters
+    const userQuery = req.query; // Assuming the user provides query parameters in the URL
+
+    console.log('userQuery', userQuery);
+
+    // Find documents that match the user's query parameters
+    const result = await collection.find(userQuery).toArray();
+
+    console.log('Query Result:', result);
+
+    // Respond to the client with the retrieved data
+    res.json({ data: result }); // Modify the response format as needed
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'An error occurred while retrieving data' });
+  }
+});
+
+
+
 
 app.get('*', (req, res) => {
   res.status(404).send('404: Page not found');
