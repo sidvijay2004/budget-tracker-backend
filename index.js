@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const OpenAI = require('openai');
 const cors = require('cors'); // Import the cors package
 
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
 const connectToDatabase = require('./db'); // Import the connectToDatabase function
 
 
@@ -142,6 +142,33 @@ app.get('/getData', async (req, res) => {
   } catch (error) {
     console.error('Error:', error);
     res.status(500).json({ error: 'An error occurred while retrieving data' });
+  }
+});
+
+app.delete('/deleteData/:id', async (req, res) => {
+  const { id } = req.params; // Get the ID from request parameters
+
+  try {
+    const db = await connectToDatabase(); // Establish database connection
+
+    // Accessing the desired collection
+    const collection = db.collection('myCollection'); // Replace with your collection name
+
+    // Convert the string ID to an ObjectId
+    const objectId = new ObjectId(id);
+
+    // Delete the document with the provided ObjectId
+    const result = await collection.deleteOne({ _id: objectId });
+
+    if (result.deletedCount === 1) {
+      res.status(200).json({ message: 'Deletion successful' });
+      console.log('Deletion successful');
+    } else {
+      res.status(404).json({ message: 'Document not found' });
+    }
+  } catch (error) {
+    console.error('Error deleting document:', error);
+    res.status(500).json({ error: 'An error occurred while deleting data' });
   }
 });
 
