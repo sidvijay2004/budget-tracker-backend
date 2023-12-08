@@ -5,7 +5,7 @@ Welcome to the Budget Prompter Backend! This part of the application serves as t
 ## Prerequisites
 
 - Node.js (v20.10.0) - [Install Node.js](https://nodejs.org/)
-- MongoDB (running on port 27017) - [Install MongoDB](https://docs.mongodb.com/manual/installation/)
+- MongoDB (running on port 27017) - [Install MongoDB]([https://docs.mongodb.com/manual/installation/](https://www.mongodb.com/try/download/compass))
 
 ## Getting Started
 
@@ -50,6 +50,19 @@ Welcome to the Budget Prompter Backend! This part of the application serves as t
     # OR using Yarn
     yarn node index.js
     ```
+
+## Connecting MongoDB Compass to Node.js Backend
+
+To connect MongoDB Compass to your Node.js backend, follow these steps:
+
+### 1. Install MongoDB Compass:
+
+If you haven't already installed MongoDB Compass, download and install it from the [official MongoDB website](https://www.mongodb.com/try/download/compass).
+
+### 2. Find MongoDB Connection String:
+
+Create a new Database and Collection in MongoDB. Find the connection string and connect it with the existing Connection String in db.js by replacing uri variable. In addition, replace all instances of db.collection('COLLECTION') with your collection in index.js.
+
 
 ## Usage
 
