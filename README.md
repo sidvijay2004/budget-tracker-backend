@@ -46,9 +46,9 @@ Welcome to the Budget Prompter Backend! This part of the application serves as t
 6. Start the backend server:
 
     ```bash
-    npm start
+    node index.js
     # OR using Yarn
-    yarn start
+    yarn node index.js
     ```
 
 ## Usage
