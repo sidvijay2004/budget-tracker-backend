@@ -53,31 +53,31 @@ app.post('/openai', async (req, res) => {
 });
 
 app.post('/openai/image', async (req, res) => {
-const userData = req.body;
-const {salary, savingsGoal, timePeriod, expenses, description} = userData;
-
-prompt =  `Generate an image for this information about a user: user description: ${description}, `
-
-const numberOfImages = 1;
-const imageSize = "1024x1024";
-
-  try {
-    const imageGenaration = await openai.images.generate(	
-      {
-        model: "dall-e-3",
-        prompt: prompt,
-        n: numberOfImages,
-        size: imageSize
-      
-      });
-
-    const image_url = imageGenaration.data[0].url; 
-    res.json({ image_url: image_url }); 
-
-  } catch (error) {
-    res.status(500).json({ error: 'An error occurred' });
-  }
-});
+  const userData = req.body; 
+  const { salary, savingsGoal, timePeriod, expenses, description} = userData;
+    
+  prompt =  `Generate an image for this information about a user: user description: ${description}, `
+  
+  const numberOfImages = 1;
+  const imageSize = "1024x1024";
+  
+    try {
+      const imageGenaration = await openai.images.generate(	
+        {
+          model: "dall-e-3",
+          prompt: prompt,
+          n: numberOfImages,
+          size: imageSize
+        
+        });
+  
+      const image_url = imageGenaration.data[0].url; 
+      res.json({ image_url: image_url }); 
+  
+    } catch (error) {
+      res.status(500).json({ error: 'An error occurred' });
+    }
+  });
 
 app.post('/putData', async (req, res) => {
   try {
