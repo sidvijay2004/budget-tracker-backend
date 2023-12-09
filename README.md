@@ -5,7 +5,7 @@ Welcome to the Budget Prompter Backend! This part of the application serves as t
 ## Prerequisites
 
 - Node.js (v20.10.0) - [Install Node.js](https://nodejs.org/)
-- MongoDB (running on port 27017) - [Install MongoDB]([https://docs.mongodb.com/manual/installation/](https://www.mongodb.com/try/download/compass))
+- MongoDB (running on port 27017) - [Follow Steps Below]
 
 ## Getting Started
 
@@ -21,20 +21,12 @@ Welcome to the Budget Prompter Backend! This part of the application serves as t
     cd budget-tracker-backend
     ```
 
-3. Install Express for API connectivity:
+4. Install dependencies:
 
     ```bash
-    npm install express
+    npm install
     # OR using Yarn
-    yarn add express
-    ```
-
-4. Install OpenAI library for Node.js:
-
-    ```bash
-    npm install openai
-    # OR using Yarn
-    yarn add openai
+    yarn install
     ```
 
 5. Update OpenAI API key:
@@ -42,6 +34,7 @@ Welcome to the Budget Prompter Backend! This part of the application serves as t
    - Locate the `index.js` file in the project.
    - Find the section where the OpenAI API key is required.
    - Replace `YOUR_OPENAI_API_KEY` with your actual OpenAI API key.
+     If you don't have a key, you can generate one using the docs here [Generate OpenAI API Key](https://platform.openai.com/docs/quickstart?context=python)
 
 6. Start the backend server:
 
@@ -61,7 +54,10 @@ If you haven't already installed MongoDB Compass, download and install it from t
 
 ### 2. Find MongoDB Connection String:
 
-Create a new Database and Collection in MongoDB. Find the connection string and connect it with the existing Connection String in db.js by replacing uri variable. In addition, replace all instances of db.collection('COLLECTION') with your collection in index.js.
+Create a new Database and Collection in MongoDB. Once you do this:
+1. Replace **databaseName** variable with your created DataBase name (in db.js)
+2. Replace **uri** variable with your connection string (in db.js)
+3. Replace **collectionName** variable with your collection name (in index.js)
 
 
 ## Usage
