@@ -11,7 +11,7 @@ app.use(cors());
 const collectionName = 'myCollection' // Replace with your collection name
 
 const openai = new OpenAI({
-  apiKey: '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', // Replace with your OPENAI API Key
+  apiKey: 'YOUR_OPENAI_API_KEY', // Replace with your OPENAI API Key
 });
 
 app.post('/openai', async (req, res) => {
