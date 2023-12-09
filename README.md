@@ -1,6 +1,7 @@
 # Budget Prompter Backend
 
-Welcome to the Budget Prompter Backend! This part of the application serves as the server-side logic for managing budget prompts, interacting with OpenAI's GPT-3.5, handling API connections with Express, and interfacing with MongoDB for database functionality.
+Welcome to the Budget Prompter Backend! This part of the application serves as the server-side logic for managing budget prompts, interacting with OpenAI's GPT-3.5, handling API connections with Express, and interfacing with MongoDB for database functionality. To set up the frontend, follow instructions for [this](https://github.com/sidvijay2004/budget-tracker-frontend/tree/master) repository.
+
 
 ## Prerequisites
 
