@@ -1,12 +1,43 @@
-# Budget Prompter Backend
+# Budget Tracker App (BackEnd)
 
-Welcome to the Budget Prompter Backend! This part of the application serves as the server-side logic for managing budget prompts, interacting with OpenAI's GPT-3.5, handling API connections with Express, and interfacing with MongoDB for database functionality. To set up the frontend, follow instructions for [this](https://github.com/sidvijay2004/budget-tracker-frontend/tree/master) repository.
+Welcome to the Budget Tracker App! This application is designed to help users manage their budgets effectively by providing a guided step-by-step process to input financial data and receive budget analysis based on user-provided information using AI tools.
 
+**To set up the FrontEnd, follow instructions in the read.me file for [this](https://github.com/sidvijay2004/budget-tracker-frontend/tree/master) repository.**
+
+## Overview
+
+Budget Prompter is a web-based application that offers users the ability to:
+- Answer budget-related prompts to receive personalized feedback.
+- Utilize OpenAI GPT-3.5 for text-based insights.
+- Generate relevant images through DALL-E integration.
+- Store and manage budget plans.
+- View and delete saved plans.
+  
+## Architecture Overview
+
+The application follows a client-server architecture:
+
+### Frontend (Client)
+
+- **React**: The frontend is developed using React to create an interactive user interface with a multi-step form structure.
+- **React Router**: Utilizes React Router for managing different steps of the form and navigation within the application.
+- **API Interaction**: Communicates with backend APIs for processing user data and displaying budget analysis and generated images.
+- **State Management**: Utilizes React's state and hooks (e.g., useState) to manage user input data throughout the form flow.
+- **PORT 3000**
+
+### Backend (Server)
+
+- **Node.js and Express**: The backend is built on Node.js, leveraging the Express framework to handle API requests and serve endpoints for processing user data.
+- **OpenAI Integration**: Interacts with the OpenAI API for generating budget analysis based on user-provided financial details.
+- **Image Generation**: Utilizes a separate API endpoint for generating images that visualize budget-related data.
+- **Database Interaction**: Incorporates MongoDB to store and retrieve user plans and information for persistence.
+- **PORT 3001**
+  
 
 ## Prerequisites
 
-- Node.js (v20.10.0) - [Install Node.js](https://nodejs.org/)
-- MongoDB (running on port 27017) - [Follow Steps Below]
+- Node.js (v20.10.0) - [Install Node.js](https://nodejs.org/) or Yarn [Install Yarn](https://classic.yarnpkg.com/lang/en/docs/install/#windows-stable)
+- MongoDB - [Follow Steps Below]
 
 ## Getting Started
 
