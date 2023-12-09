@@ -15,6 +15,8 @@ Budget Prompter is a web-based application that offers users the ability to:
   
 ## Architecture Overview
 
+![Architecture Diagram](Architecture%20Diagram.png)
+
 The application follows a client-server architecture:
 
 ### Frontend (Client)
